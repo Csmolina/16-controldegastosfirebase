@@ -34,7 +34,7 @@ if(user!=null)
 
         <button className="btniniciar" onClick={iniciarSesion}>
           <img src={logogoogle} />
-          <span> Iniciar con Gmail</span>
+          <span> Iniciar con Gmail Actualizado</span>
         </button>
       </section>
     </Container>
