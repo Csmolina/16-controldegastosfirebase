@@ -2,11 +2,14 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import astronauta from "../assets/astronauta.png";
 import logogoogle from "../assets/logoogle.png";
+import {Icono} from "../components/atomos/Icono"
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { LottieAnimacion } from "../components/atomos/LottieAnimacion";
+import { v } from "../styles/Variables";
 export function Login() {
-    const navigate=useNavigate();
-  const {user, googleSignIn } = UserAuth();
+  const navigate = useNavigate();
+  const { user, googleSignIn } = UserAuth();
   const iniciarSesion = async () => {
     try {
       await googleSignIn();
@@ -14,84 +17,70 @@ export function Login() {
       console.log(error);
     }
   };
-  useEffect(()=>{
-if(user!=null)
-{
-    navigate("/");
-}
-  },[user])
+  useEffect(() => {
+    if (user != null) {
+      navigate("/");
+    }
+  }, [user]);
   return (
     <Container>
       <section className="imgseccion">
-        <h1>useContext REACT es cool</h1>
+        <h1>Es hora de transformar sus finanzas con FINNICK</h1>
         <div className="fondocontent">
-          <img src={astronauta} />
+          <LottieAnimacion animacionData={v.zorrologo} />
         </div>
-        <h4>Hola soy el login</h4>
-      </section>
-      <section className="panelsesion">
-        <h2>Iniciar sesión</h2>
 
         <button className="btniniciar" onClick={iniciarSesion}>
           <img src={logogoogle} />
-          <span> Iniciar con Gmail Actualizado</span>
+          <span> Iniciar con Gmail</span>
         </button>
+        <section className="contentfrase">
+      <Icono icono={v.iconocandado}/>
+        
+        <p>
+          Esta es una página segura. Si tienes dudas sobre la autenticidad de la
+          web, comunícate con nosotros <br /> al 0448594485349
+        </p>
       </section>
+      </section>
+
+    
     </Container>
   );
 }
 const Container = styled.div`
+  margin:-20px;
+  margin-left:-125px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 30px;
-  background: radial-gradient(#fedd58, #ff4139);
-  flex-direction: column-reverse;
-  width: 100vw;
-  .imgseccion {
-    background-color: white;
+  background: rgb(78,86,135);
+background: radial-gradient(circle, rgba(78,86,135,1) 0%, rgba(17,40,66,1) 100%);
+  flex-direction: row;
+  .imgseccion{
+    width: 50%;
+    height: 100vh;
     border-radius: 15px;
     padding: 20px;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
     gap: 35px;
-    margin-top: 20px;
-    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+    .fondocontent{
+      display: flex;
+      justify-content: center;
+      width: 50%;
+      height: 30%;
+      align-items: center;
+      
+    }
     h1 {
       font-size: 35px;
       font-weight: 650;
-    }
-    h4 {
-      color: #aaaaaa;
-    }
-    .fondocontent {
-      display: flex;
-      justify-content: center;
-      img {
-        width: 50%;
-        -webkit-animation: flotar 3s ease-in-out infinite;
-        animation: flotar 3s ease-in-out infinite;
-      }
-    }
-  }
-  .panelsesion {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    h2 {
-      color: white;
-      text-align: center;
-      font-weight: 600;
-      font-size: 52px;
+      color: #ffffff;
     }
     .btniniciar {
       display: flex;
@@ -106,8 +95,8 @@ const Container = styled.div`
       border-radius: 50px;
       font-weight: 700;
       font-size: 22px;
-      transition: all 0.25s ease;
       box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.12);
+      transition: all 0.25s ease;
       &:hover {
         transform: translateY(-5px);
         box-shadow: 0px 20px 40px 0px rgb(0 0 0 / 10%);
@@ -117,40 +106,38 @@ const Container = styled.div`
         opacity: 0.8;
       }
     }
-    .social {
-      gap: 20px;
+    .contentfrase{
       display: flex;
-      justify-content: center;
-      align-content: space-between;
-      color: white;
-      font-size: 30px;
-      position: relative;
-      bottom: 0;
-      .icons:hover {
-        transform: translateY(10px);
-        transition: all 0.5s;
+      font-size: 13px;
+      p {
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 450;
+        font-style: italic;
+      }
+      svg {
+        font-size: 30px;
+        color: rgba(255, 255, 255, 0.8);
       }
     }
   }
-  @media (min-width: 64em) {
-    flex-direction: row;
-    .imgseccion {
-      margin-top: 0;
-      width: 50%;
-    }
-    .panelsesion {
-      width: 50%;
+@media (max-width:48em){
+  .imgseccion{
+    width:100%;
+    .contentfrase{
+      font-size:12px;
     }
   }
-  @media (max-width: 48em) {
-    .imgseccion {
-      .fondocontent {
-        img {
-          /* width: 80%; */
-        }
-      }
+  
+}
+@media (max-width:64em){
+  .imgseccion{
+    width:100%;
+    .contentfrase{
+      font-size:12px;
     }
   }
+  
+}
   @keyframes flotar {
     0% {
       transform: translate(0, 0);

@@ -1,8 +1,8 @@
-import {BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
+import { Routes, Route,Navigate} from "react-router-dom";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { UserAuth } from "../context/AuthContext";
-import { Perfil } from "../pages/Perfil";
+import { Categorias } from "../pages/Categorias";
 import { ProtectorRuta } from "../components/ProtectorRuta";
 export function MyRoutes() {
     const{user} =UserAuth();
@@ -10,12 +10,11 @@ export function MyRoutes() {
         return user?children:<Navigate to={"/login"}/>;
     }
 return (
-<BrowserRouter>
+
 <Routes>
     <Route path="/" element={<RequireAuth><Home/></RequireAuth>}/>
     <Route path="/login" element={<Login/>}/>
-    <Route path="/perfil" element={<ProtectorRuta><Perfil/></ProtectorRuta>}/>
+    <Route path="/categorias" element={<ProtectorRuta><Categorias/></ProtectorRuta>}/>
 </Routes>
-</BrowserRouter>
 );
  }
